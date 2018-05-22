@@ -134,7 +134,7 @@ task downloadJSCHeaders(type: Download) {
 }
 
 task downloadJSC(type: Exec) {
-    workingDir "$rootDir/jsc-android-manager"
+    workingDir "../jsc-android-manager"
     commandLine('yarn', 'install')
 }
 
