@@ -231,6 +231,7 @@ task packageReactNdkLibs(dependsOn: buildReactNdkLib, type: Copy) {
     // include jsc dependencies
     from "$thirdPartyNdkDir/jsc/jni"
     include '**/*.so'
+    exclude '**/libc++_shared.so'
 
     into "$buildDir/react-ndk/exported"
 }
