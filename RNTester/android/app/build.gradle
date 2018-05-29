@@ -34,6 +34,10 @@ import com.android.build.OutputFile
  *   // the root of your project, i.e. where "package.json" lives
  *   root: "../../",
  *
+ *   // path to react cli commands
+ *   // IMPORTANT: this path is relative to the defined 'root'
+ *   cliPath: "node_modules/react-native/local-cli/cli.js"
+ *
  *   // where to put the JS bundle asset in debug mode
  *   jsBundleDirDebug: "$buildDir/intermediates/assets/debug",
  *
