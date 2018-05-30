@@ -37,7 +37,8 @@ LOCAL_CFLAGS += \
  -frtti \
  -Wno-pessimizing-move \
  -Wno-inconsistent-missing-override \
- -Wno-error=unused-lambda-capture
+ -Wno-unused-lambda-capture
+ 
 CXX11_FLAGS := -std=c++11
 LOCAL_CFLAGS += $(CXX11_FLAGS)
 LOCAL_EXPORT_CPPFLAGS := $(CXX11_FLAGS)
