@@ -34,6 +34,10 @@ import com.android.build.OutputFile
  *   // the root of your project, i.e. where "package.json" lives
  *   root: "../../",
  *
+ *   // path to react cli commands
+ *   // IMPORTANT: this path is relative to the defined 'root'
+ *   cliPath: "node_modules/react-native/local-cli/cli.js"
+ *
  *   // where to put the JS bundle asset in debug mode
  *   jsBundleDirDebug: "$buildDir/intermediates/assets/debug",
  *
@@ -60,7 +64,8 @@ import com.android.build.OutputFile
 project.ext.react = [
     bundleAssetName: "RNTesterApp.android.bundle",
     entryFile: file("../../js/RNTesterApp.android.js"),
-    root: "../../../../",
+    cliPath: "./local-cli/cli.js",
+    root: "../../../",
     inputExcludes: ["android/**", "./**"]
 ]
 
@@ -75,7 +80,7 @@ apply from: "../../../react.gradle"
  * Upload all the APKs to the Play Store and people will download
  * the correct one based on the CPU architecture of their device.
  */
-def enableSeparateBuildPerCPUArchitecture = false
+def enableSeparateBuildPerCPUArchitecture = true
 
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
@@ -92,9 +97,6 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-        ndk {
-            abiFilters "armeabi-v7a", "x86"
-        }
     }
     signingConfigs {
         release {
@@ -109,7 +111,7 @@ android {
             enable enableSeparateBuildPerCPUArchitecture
             universalApk false
             reset()
-            include "armeabi-v7a", "x86"
+            include "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
         }
     }
     buildTypes {
@@ -124,7 +126,7 @@ android {
         variant.outputs.each { output ->
             // For each separate APK per architecture, set a unique version code as described here:
             // http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits
-            def versionCodes = ["armeabi-v7a":1, "x86":2]
+            def versionCodes = ["armeabi-v7a":1, "x86":2, "arm64-v8a":3, "x86_64":4]
             def abi = output.getFilter(OutputFile.ABI)
             if (abi != null) {  // null for the universal-debug, universal-release variants
                 output.versionCodeOverride =
